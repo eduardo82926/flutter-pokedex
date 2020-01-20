@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pokedex/components/GetPokemonIcon.dart';
 import 'package:flutter_pokedex/components/PokemonsRowElements.dart';
 import 'package:flutter_pokedex/models/Pokemon.dart';
 
@@ -27,7 +28,7 @@ class PokemonCard extends StatelessWidget {
           ),
           Expanded(
             flex: 7,
-            child: Image.asset(_pokemon.icone),
+            child: GetPokemonIcon(_pokemon),
           ),
         ],
       ),
