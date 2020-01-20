@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pokedex/components/PokemonsRowElements.dart';
 import 'package:flutter_pokedex/models/Pokemon.dart';
 
 class PokemonCard extends StatelessWidget {
@@ -19,11 +20,7 @@ class PokemonCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(_pokemon.nome, textScaleFactor: 1, textAlign: TextAlign.left),
-                  Row(
-                    children: _pokemon.tipo.map((String tipo) {
-                      return Image.asset(tipo, alignment: Alignment.centerRight);
-                    }).toList(),
-                  ),
+                  PokemonRowElements(_pokemon.tipos),
                 ],
               ),
             ),
