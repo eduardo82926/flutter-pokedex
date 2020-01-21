@@ -5,18 +5,16 @@ import 'package:flutter_pokedex/components/PokemonsRowElements.dart';
 import 'package:flutter_pokedex/models/Pokemon.dart';
 
 class DescricaoPokemon extends StatelessWidget {
+
+  final Pokemon _pokemon;
+
+  DescricaoPokemon(this._pokemon);
+
   @override
   Widget build(BuildContext context) {
-    Pokemon _squirtle = Pokemon(
-        "007",
-        "Squirtle",
-        "Squirtle's shell is not merely used for protection. The shell's rounded shape and the grooves on its surface help minimize resistance in water, enabling this Pokémon to swim at high speeds.",
-        ["water"],
-        ["fire", "fly", "psychic", "rock"],
-        ["007", "008", "009"]);
     return Scaffold(
       appBar: AppBar(
-        title: Text(_squirtle.nome),
+        title: Text(_pokemon.nome),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -27,14 +25,14 @@ class DescricaoPokemon extends StatelessWidget {
                   child: Container(
                     height: 215,
                     color: Colors.grey[300],
-                    child: GetPokemonIcon(_squirtle),
+                    child: GetPokemonIcon(_pokemon),
                   ),
                 ),
               ],
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: CustomizedText(_squirtle.descricao),
+              child: CustomizedText(_pokemon.descricao),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -47,7 +45,7 @@ class DescricaoPokemon extends StatelessWidget {
                         Expanded(child: CustomizedText("Type")),
                         Expanded(
                           flex: 2,
-                          child: PokemonRowElements(_squirtle.tipos),
+                          child: PokemonRowElements(_pokemon.tipos),
                         ),
                       ],
                     ),
@@ -59,7 +57,7 @@ class DescricaoPokemon extends StatelessWidget {
                         Expanded(child: CustomizedText("Weaknesses")),
                         Expanded(
                           flex: 2,
-                          child: PokemonRowElements(_squirtle.fraquezas),
+                          child: PokemonRowElements(_pokemon.fraquezas),
                         ),
                       ],
                     ),
@@ -76,7 +74,7 @@ class DescricaoPokemon extends StatelessWidget {
                   children: <Widget>[
                     CustomizedText("Evolutions"),
                     Row(
-                      children: _squirtle.evolucoes.map((String id) {
+                      children: _pokemon.evolucoes.map((String id) {
                         if (id.contains(">")) {
                           return Expanded(
                             flex: 1,

@@ -9,7 +9,7 @@ class FlutterPokedex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DescricaoPokemon(),
+      home: ListaPokemon(),
       theme: ThemeData(
         primaryColor: Colors.red[900],
       ),
