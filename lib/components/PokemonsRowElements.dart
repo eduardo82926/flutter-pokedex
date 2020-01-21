@@ -10,7 +10,7 @@ class PokemonRowElements extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: _elements.map((String tipo) {
-        return Image.asset(tipo, alignment: Alignment.centerRight);
+        return Image.asset("assets/pokemons_types/"+tipo+".png", alignment: Alignment.centerRight, height: 25);
       }).toList(),
     );
   }
