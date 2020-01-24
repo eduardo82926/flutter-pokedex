@@ -1,11 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_pokedex/components/GetPokemonIcon.dart';
 import 'package:flutter_pokedex/components/PokemonsRowElements.dart';
 import 'package:flutter_pokedex/models/Pokemon.dart';
 
 class DescricaoPokemon extends StatelessWidget {
-
   final Pokemon _pokemon;
 
   DescricaoPokemon(this._pokemon);
@@ -17,62 +18,55 @@ class DescricaoPokemon extends StatelessWidget {
         title: Text(_pokemon.nome),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    height: 215,
-                    color: Colors.grey[300],
-                    child: GetPokemonIcon(_pokemon),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                width: double.maxFinite,
+                child: Container(
+                  height: 215,
+                  child: GetPokemonIcon(_pokemon),
+                ),
+              ),
+              Text('Description', style: TextStyle(fontSize: 24)),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: Text(_pokemon.descricao, style: TextStyle(fontSize: 16)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: SizedBox(
+                  width: double.maxFinite,
+                  child: DataTable(
+                    columns: [
+                      DataColumn(
+                          label: Text('Type', style: TextStyle(fontSize: 16))),
+                      DataColumn(
+                          label:
+                              Text('Elements', style: TextStyle(fontSize: 16))),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(Text('Self', style: TextStyle(fontSize: 16))),
+                        DataCell(PokemonRowElements(_pokemon.tipos)),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(
+                            Text('Weaknesses', style: TextStyle(fontSize: 16))),
+                        DataCell(PokemonRowElements(_pokemon.fraquezas)),
+                      ]),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: CustomizedText(_pokemon.descricao),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(child: CustomizedText("Type")),
-                        Expanded(
-                          flex: 2,
-                          child: PokemonRowElements(_pokemon.tipos),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(child: CustomizedText("Weaknesses")),
-                        Expanded(
-                          flex: 2,
-                          child: PokemonRowElements(_pokemon.fraquezas),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
               ),
-            ),
-            Container(
-              height: 200,
-              color: Colors.grey[300],
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              Container(
+                //color: Colors.grey[300],
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    CustomizedText("Evolutions"),
+                    Text("Evolutions", style: TextStyle(fontSize: 24)),
                     Row(
                       children: _pokemon.evolucoes.map((String id) {
                         if (id.contains(">")) {
@@ -90,27 +84,9 @@ class DescricaoPokemon extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class CustomizedText extends StatelessWidget {
-  final String _text;
-  final TextAlign align;
-
-  CustomizedText(this._text, {this.align = TextAlign.left});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      _text,
-      textAlign: align,
-      style: TextStyle(
-        fontSize: 20,
       ),
     );
   }
